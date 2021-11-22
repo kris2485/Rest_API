@@ -13,8 +13,13 @@ router.route('/seats/:id').get((req, res) => {
 });
 
 router.route('/seats').post((req, res) => {
-  db.seats.push({ id: uuidv4(), day: req.body.day, seat: req.body.seat, client: req.body.client, email: req.body.email });
-  res.json({ message: 'Your seat has been added' });
+  const isTaken = db.seats.some((e) => e.day == req.body.day && e.seat == req.body.seat);
+  if (isTaken) {
+    res.json({ message: 'The slot is already taken...' });
+  } else {
+    db.seats.push({ id: uuidv4(), day: req.body.day, seat: req.body.seat, client: req.body.client, email: req.body.email });
+    res.json({ message: 'Your seat has been added' });
+  }
 });
 
 router.route('/seats/:id').put((req, res) => {
