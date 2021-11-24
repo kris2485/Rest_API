@@ -6,7 +6,7 @@
   "author": "Krzysztof Rajnert <krzysiekrajnert@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "build": "cd client && npm install && npm build"
   },
   "dependencies": {
