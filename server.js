@@ -32,7 +32,8 @@ app.use((req, res) => {
   res.status(404).send({ message: 'Not found...' });
 });
 
-mongoose.connect('mongodb://localhost:27017/NewWaveDB', { useNewUrlParser: true });
+const URI = process.env.NODE_ENV === 'production' ? 'mongodb+srv://kris2485:<password>@cluster0.hdooi.mongodb.net/myFirstDatabase?retryWrites=true&w=majority' : 'mongodb://localhost:27017/NewWaveDB';
+mongoose.connect(URI, { useNewUrlParser: true });
 const db = mongoose.connection;
 
 db.once('open', () => {
